@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: API de Autenticação
+  version: 1.0.0
+
+tags:
+  - name: Login
+    description: Endpoints relacionados à autenticação
+
+paths:
+  /auth/registration:
+    post:
+      tags:
+        - Login
+      summary: Criar login de usuário
+      operationId: AuthRegister
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRegisterRequest'
+      responses:
+        '201':
+          description: Login criado com sucesso
+
+  /auth/login:
+    post:
+      tags:
+        - Login
+      summary: Realizar login
+      operationId: AuthLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthLoginRequest'
+      responses:
+        '200':
+          description: Login realizado com sucesso
+
+  /login/{idLogin}:
+    patch:
+      tags:
+        - Login
+      summary: Atualizar senha de usuário
+      operationId: UpdatePassword
+      parameters:
+        - name: idLogin
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePasswordRequest'
+      responses:
+        '200':
+          description: Senha atualizada com sucesso
+
+    delete:
+      tags:
+        - Login
+      summary: Deletar login de usuário
+      operationId: DeleteLogin
+      parameters:
+        - name: idLogin
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Login deletado com sucesso
+
+components:
+  schemas:
+    AuthRegisterRequest:
+      type: object
+      required:
+        - usuario_alias
+        - senha
+        - cpf
+      properties:
+        usuario_alias:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+
+    AuthLoginRequest:
+      type: object
+      required:
+        - usuario
+        - senha
+        - idCliente
+      properties:
+        usuario:
+          type: string
+        senha:
+          type: string
+        idCliente:
+          type: string
+
+    UpdatePasswordRequest:
+      type: object
+      required:
+        - senhaAntiga
+        - senhaNova
+      properties:
+        senhaAntiga:
+          type: string
+        senhaNova:
+          type: string
