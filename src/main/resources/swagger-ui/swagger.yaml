@@ -19,7 +19,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthRegisterRequest'
+              $ref: '#/components/schemas/AuthRegister'
       responses:
         '201':
           description: Login criado com sucesso
@@ -35,19 +35,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthLoginRequest'
+              $ref: '#/components/schemas/AuthLogin'
       responses:
         '200':
           description: Login realizado com sucesso
 
-  /login/{idLogin}:
+  /login/{cpf}:
     patch:
       tags:
         - Login
       summary: Atualizar senha de usuário
       operationId: UpdatePassword
       parameters:
-        - name: idLogin
+        - name: cpf
           in: path
           required: true
           schema:
@@ -57,7 +57,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePasswordRequest'
+              $ref: '#/components/schemas/UpdatePassword'
       responses:
         '200':
           description: Senha atualizada com sucesso
@@ -68,7 +68,7 @@ paths:
       summary: Deletar login de usuário
       operationId: DeleteLogin
       parameters:
-        - name: idLogin
+        - name: cpf
           in: path
           required: true
           schema:
@@ -79,35 +79,32 @@ paths:
 
 components:
   schemas:
-    AuthRegisterRequest:
+    AuthRegister:
       type: object
       required:
-        - usuario_alias
+        - usuario
         - senha
         - cpf
       properties:
-        usuario_alias:
+        usuario:
           type: string
         senha:
           type: string
         cpf:
           type: string
 
-    AuthLoginRequest:
+    AuthLogin:
       type: object
       required:
         - usuario
         - senha
-        - idCliente
       properties:
         usuario:
           type: string
         senha:
           type: string
-        idCliente:
-          type: string
 
-    UpdatePasswordRequest:
+    UpdatePassword:
       type: object
       required:
         - senhaAntiga

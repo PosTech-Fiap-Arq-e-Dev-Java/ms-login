@@ -5,14 +5,16 @@ public class Login {
     private Integer id;
     private String login;
     private String senha;
+    private String cpf;
 
     public Login(){
     }
 
-    public Login(Integer id, String login, String senha) {
+    public Login(Integer id, String login, String senha, String cpf) {
         this.id = id;
         this.login = login;
         this.senha = senha;
+        this.cpf = cpf;
     }
 
     public Integer getId() {
@@ -37,5 +39,13 @@ public class Login {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }
