@@ -2,24 +2,22 @@ package com.fiap.ms.login.adapters.out.repository;
 
 import com.fiap.ms.login.adapters.out.repository.mapper.LoginEntityMapper;
 import com.fiap.ms.login.application.core.domain.LoginDomain;
-import com.fiap.ms.login.application.ports.out.GetLoginOutputPort;
+import com.fiap.ms.login.application.ports.out.AuthRegisterOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
-public class GetLoginAdapter implements GetLoginOutputPort {
+public class AuthRegisterAdapter implements AuthRegisterOutputPort {
 
     @Autowired
-    private LoginRepository repository;
+    private LoginRepository loginRepository;
 
     @Autowired
     private LoginEntityMapper loginEntityMapper;
 
     @Override
-    public Optional<LoginDomain> find(String cpf) {
-        var loginEntity = repository.findLoginByCpf(cpf);
-        return loginEntity.map(entity -> loginEntityMapper.toLogin(entity));
+    public void insert(LoginDomain login) {
+        var loginEntity = loginEntityMapper.toLoginEntity(login);
+        loginRepository.save(loginEntity);
     }
 }

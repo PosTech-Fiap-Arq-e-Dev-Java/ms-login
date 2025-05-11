@@ -2,9 +2,7 @@ package com.fiap.ms.login.application.ports.out;
 
 import com.fiap.ms.login.application.core.domain.LoginDomain;
 
-import java.util.Optional;
+public interface AuthRegisterOutputPort {
 
-public interface GetLoginOutputPort {
-
-    Optional<LoginDomain> find(String cpf);
+    void insert(LoginDomain customer);
 }

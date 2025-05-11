@@ -1,18 +1,18 @@
 package com.fiap.ms.login.application.core.domain;
 
-public class Login {
+public class LoginDomain {
 
     private Integer id;
-    private String login;
+    private String usuario;
     private String senha;
     private String cpf;
 
-    public Login(){
+    public LoginDomain(){
     }
 
-    public Login(Integer id, String login, String senha, String cpf) {
+    public LoginDomain(Integer id, String usuario, String senha, String cpf) {
         this.id = id;
-        this.login = login;
+        this.usuario = usuario;
         this.senha = senha;
         this.cpf = cpf;
     }
@@ -25,12 +25,12 @@ public class Login {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getSenha() {
