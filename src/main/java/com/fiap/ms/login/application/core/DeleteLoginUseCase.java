@@ -16,8 +16,8 @@ public class DeleteLoginUseCase implements DeleteLoginInputPort {
     }
 
     @Override
-    public void delete(String cpf) {
-        var login = getLoginOutputPort.find(cpf)
+    public void delete(String usuario) {
+        var login = getLoginOutputPort.find(usuario)
                 .orElseThrow(() -> new RuntimeException("Login not found"));
         deleteLoginOutputPort.delete(login.getId());
     }

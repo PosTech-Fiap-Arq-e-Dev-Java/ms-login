@@ -6,6 +6,7 @@ import com.fiap.ms.login.application.ports.in.AuthRegisterInputPort;
 import com.fiap.ms.login.application.ports.in.DeleteLoginInputPort;
 import com.fiap.ms.login.gen.model.AuthLoginDto;
 import com.fiap.ms.login.gen.model.AuthRegisterDto;
+import com.fiap.ms.login.gen.model.AuthStatusDto;
 import com.fiap.ms.login.gen.model.UpdatePasswordDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,13 @@ public class LoginController implements LoginApi {
     }
 
     @Override
-    public ResponseEntity<Void> _deleteLogin(String cpf) {
-        deleteLoginInputPort.delete(cpf);
+    public ResponseEntity<AuthStatusDto> _authStatus(String usuario) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> _deleteLogin(String usuario) {
+        deleteLoginInputPort.delete(usuario);
         return ResponseEntity.noContent().build();
     }
 

@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface LoginRepository extends JpaRepository<LoginEntity, Integer> {
 
-    Optional<LoginEntity> findLoginByCpf(String cpf);
+    Optional<LoginEntity> findLoginByUsuario(String usuario);
+    Optional<LoginEntity> findByUsuarioOrDocumento(String usuario, String documento);
 }

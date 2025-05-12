@@ -18,8 +18,14 @@ public class GetLoginAdapter implements GetLoginOutputPort {
     private LoginEntityMapper loginEntityMapper;
 
     @Override
-    public Optional<LoginDomain> find(String cpf) {
-        var loginEntity = repository.findLoginByCpf(cpf);
+    public Optional<LoginDomain> find(String usuario) {
+        var loginEntity = repository.findLoginByUsuario(usuario);
+        return loginEntity.map(entity -> loginEntityMapper.toLogin(entity));
+    }
+
+    @Override
+    public Optional<LoginDomain> findByUsuarioOrDocumento(String usuario, String documento) {
+        var loginEntity = repository.findByUsuarioOrDocumento(usuario, documento);
         return loginEntity.map(entity -> loginEntityMapper.toLogin(entity));
     }
 }

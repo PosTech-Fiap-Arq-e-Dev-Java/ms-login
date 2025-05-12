@@ -8,6 +8,42 @@ tags:
     description: Endpoints relacionados à autenticação
 
 paths:
+  /auth/login:
+    get:
+      tags:
+        - Login
+      operationId: AuthStatus
+      summary: Consulta login por usuário
+      parameters:
+        - name: usuario
+          in: query
+          description: usuario
+          required: true
+          schema:
+            type: string
+            example: "fulano"
+      responses:
+        '200':
+          description: Consulta realizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthStatus'
+    post:
+      tags:
+        - Login
+      summary: Realizar login
+      operationId: AuthLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthLogin'
+      responses:
+        '200':
+          description: Login realizado com sucesso
+
   /auth/registration:
     post:
       tags:
@@ -24,30 +60,14 @@ paths:
         '201':
           description: Login criado com sucesso
 
-  /auth/login:
-    post:
-      tags:
-        - Login
-      summary: Realizar login
-      operationId: AuthLogin
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthLogin'
-      responses:
-        '200':
-          description: Login realizado com sucesso
-
-  /login/{cpf}:
+  /login/{usuario}:
     patch:
       tags:
         - Login
       summary: Atualizar senha de usuário
       operationId: UpdatePassword
       parameters:
-        - name: cpf
+        - name: usuario
           in: path
           required: true
           schema:
@@ -68,7 +88,7 @@ paths:
       summary: Deletar login de usuário
       operationId: DeleteLogin
       parameters:
-        - name: cpf
+        - name: usuario
           in: path
           required: true
           schema:
@@ -84,13 +104,13 @@ components:
       required:
         - usuario
         - senha
-        - cpf
+        - documento
       properties:
         usuario:
           type: string
         senha:
           type: string
-        cpf:
+        documento:
           type: string
 
     AuthLogin:
@@ -103,6 +123,13 @@ components:
           type: string
         senha:
           type: string
+
+    AuthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "ativo"
 
     UpdatePassword:
       type: object

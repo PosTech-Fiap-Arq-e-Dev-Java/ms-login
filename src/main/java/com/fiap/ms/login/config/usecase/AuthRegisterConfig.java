@@ -2,6 +2,7 @@ package com.fiap.ms.login.config.usecase;
 
 import com.fiap.ms.login.application.core.AuthRegisterUseCase;
 import com.fiap.ms.login.application.ports.out.AuthRegisterOutputPort;
+import com.fiap.ms.login.application.ports.out.GetLoginOutputPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class AuthRegisterConfig {
 
     @Bean
-    public AuthRegisterUseCase authRegisterUseCase(AuthRegisterOutputPort authRegisterOutputPort){
-        return new AuthRegisterUseCase(authRegisterOutputPort);
+    public AuthRegisterUseCase authRegisterUseCase(AuthRegisterOutputPort authRegisterOutputPort,
+                                                   GetLoginOutputPort getLoginOutputPort){
+        return new AuthRegisterUseCase(authRegisterOutputPort, getLoginOutputPort);
     }
 }

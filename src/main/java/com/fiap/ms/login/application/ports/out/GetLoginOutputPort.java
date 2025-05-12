@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface GetLoginOutputPort {
 
-    Optional<LoginDomain> find(String cpf);
+    Optional<LoginDomain> find(String usuario);
+    Optional<LoginDomain> findByUsuarioOrDocumento(String usuario, String documento);
 }

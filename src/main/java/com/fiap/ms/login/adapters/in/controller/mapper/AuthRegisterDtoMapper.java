@@ -13,5 +13,7 @@ public interface AuthRegisterDtoMapper {
     AuthRegisterDtoMapper INSTANCE = Mappers.getMapper(AuthRegisterDtoMapper.class);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "tipoUsuario", ignore = true)
+    @Mapping(target = "statusUsuario", ignore = true)
     LoginDomain toLogin(AuthRegisterDto authRegisterDto);
 }
