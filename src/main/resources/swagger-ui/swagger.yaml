@@ -43,6 +43,10 @@ paths:
       responses:
         '200':
           description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginResponse'
 
   /auth/registration:
     post:
@@ -123,6 +127,16 @@ components:
           type: string
         senha:
           type: string
+
+    AuthLoginResponse:
+      type: object
+      properties:
+        usuario:
+          type: string
+          example: fulano
+        tipoUsuario:
+          type: string
+          example: "cliente"
 
     AuthStatus:
       type: object

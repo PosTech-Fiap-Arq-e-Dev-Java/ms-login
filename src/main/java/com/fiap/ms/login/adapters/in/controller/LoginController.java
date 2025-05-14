@@ -3,11 +3,13 @@ package com.fiap.ms.login.adapters.in.controller;
 import com.fiap.ms.login.LoginApi;
 import com.fiap.ms.login.adapters.in.controller.mapper.AuthRegisterDtoMapper;
 import com.fiap.ms.login.adapters.in.controller.mapper.UpdatePasswordMapper;
+import com.fiap.ms.login.application.ports.in.AuthLoginInputPort;
 import com.fiap.ms.login.application.ports.in.InsertLoginInputPort;
 import com.fiap.ms.login.application.ports.in.DeleteLoginInputPort;
 import com.fiap.ms.login.application.ports.in.GetLoginInputPort;
 import com.fiap.ms.login.application.ports.in.PatchLoginInputPort;
 import com.fiap.ms.login.gen.model.AuthLoginDto;
+import com.fiap.ms.login.gen.model.AuthLoginResponseDto;
 import com.fiap.ms.login.gen.model.AuthRegisterDto;
 import com.fiap.ms.login.gen.model.AuthStatusDto;
 import com.fiap.ms.login.gen.model.UpdatePasswordDto;
@@ -26,21 +28,27 @@ public class LoginController implements LoginApi {
     private final DeleteLoginInputPort deleteLoginInputPort;
     private final GetLoginInputPort getLoginInputPort;
     private final PatchLoginInputPort patchLoginInputPort;
+    private final AuthLoginInputPort authLoginInputPort;
 
     public LoginController(InsertLoginInputPort insertLoginInputPort,
                            DeleteLoginInputPort deleteLoginInputPort,
                            GetLoginInputPort getLoginInputPort,
-                           PatchLoginInputPort patchLoginInputPort) {
+                           PatchLoginInputPort patchLoginInputPort,
+                           AuthLoginInputPort authLoginInputPort) {
         this.insertLoginInputPort = insertLoginInputPort;
         this.deleteLoginInputPort = deleteLoginInputPort;
         this.getLoginInputPort = getLoginInputPort;
         this.patchLoginInputPort = patchLoginInputPort;
+        this.authLoginInputPort = authLoginInputPort;
     }
 
     @Override
-    public ResponseEntity<Void> _authLogin(AuthLoginDto authLoginRequestDto) {
-        return ResponseEntity.ok().build();
-
+    public ResponseEntity<AuthLoginResponseDto> _authLogin(AuthLoginDto authLoginRequestDto) {
+        var authLogin = authLoginInputPort.find(authLoginRequestDto.getUsuario(), authLoginRequestDto.getSenha());
+        AuthLoginResponseDto authLoginResponseDto = new AuthLoginResponseDto();
+        authLoginResponseDto.setUsuario(authLogin.getUsuario());
+        authLoginResponseDto.setTipoUsuario(authLogin.getTipoUsuarioEnum().getDescricao());
+        return ResponseEntity.ok(authLoginResponseDto);
     }
 
     @Override
