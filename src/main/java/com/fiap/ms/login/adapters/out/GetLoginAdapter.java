@@ -32,4 +32,10 @@ public class GetLoginAdapter implements GetLoginOutputPort {
         var loginEntity = repository.findLoginByUsuario(usuario);
         return loginEntity.map(LoginEntityMapper.INSTANCE::toLogin);
     }
+
+    @Override
+    public Optional<LoginDomain> findUsuarioSenhaByUsuario(String usuario, String senha) {
+        var loginEntity = repository.findByUsuarioAndSenha(usuario, senha);
+        return loginEntity.map(LoginEntityMapper.INSTANCE::toLogin);
+    }
 }

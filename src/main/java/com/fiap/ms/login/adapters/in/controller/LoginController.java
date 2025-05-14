@@ -2,9 +2,11 @@ package com.fiap.ms.login.adapters.in.controller;
 
 import com.fiap.ms.login.LoginApi;
 import com.fiap.ms.login.adapters.in.controller.mapper.AuthRegisterDtoMapper;
-import com.fiap.ms.login.application.ports.in.AuthRegisterInputPort;
+import com.fiap.ms.login.adapters.in.controller.mapper.UpdatePasswordMapper;
+import com.fiap.ms.login.application.ports.in.InsertLoginInputPort;
 import com.fiap.ms.login.application.ports.in.DeleteLoginInputPort;
 import com.fiap.ms.login.application.ports.in.GetLoginInputPort;
+import com.fiap.ms.login.application.ports.in.PatchLoginInputPort;
 import com.fiap.ms.login.gen.model.AuthLoginDto;
 import com.fiap.ms.login.gen.model.AuthRegisterDto;
 import com.fiap.ms.login.gen.model.AuthStatusDto;
@@ -20,16 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1")
 public class LoginController implements LoginApi {
 
-    private final AuthRegisterInputPort authRegisterInputPort;
+    private final InsertLoginInputPort insertLoginInputPort;
     private final DeleteLoginInputPort deleteLoginInputPort;
     private final GetLoginInputPort getLoginInputPort;
+    private final PatchLoginInputPort patchLoginInputPort;
 
-    public LoginController(AuthRegisterInputPort authRegisterInputPort,
+    public LoginController(InsertLoginInputPort insertLoginInputPort,
                            DeleteLoginInputPort deleteLoginInputPort,
-                           GetLoginInputPort getLoginInputPort) {
-        this.authRegisterInputPort = authRegisterInputPort;
+                           GetLoginInputPort getLoginInputPort,
+                           PatchLoginInputPort patchLoginInputPort) {
+        this.insertLoginInputPort = insertLoginInputPort;
         this.deleteLoginInputPort = deleteLoginInputPort;
         this.getLoginInputPort = getLoginInputPort;
+        this.patchLoginInputPort = patchLoginInputPort;
     }
 
     @Override
@@ -41,7 +46,7 @@ public class LoginController implements LoginApi {
     @Override
     public ResponseEntity<Void> _authRegister(AuthRegisterDto authRegisterRequestDto) {
         var login = AuthRegisterDtoMapper.INSTANCE.toLogin(authRegisterRequestDto);
-        authRegisterInputPort.insert(login);
+        insertLoginInputPort.insert(login);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -63,7 +68,9 @@ public class LoginController implements LoginApi {
     }
 
     @Override
-    public ResponseEntity<Void> _updatePassword(String idLogin, UpdatePasswordDto updatePasswordRequestDto) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> _updatePassword(String usuario, UpdatePasswordDto updatePasswordDto) {
+        var domain = UpdatePasswordMapper.INSTANCE.toUpdatePasswordDomain(updatePasswordDto);
+        patchLoginInputPort.update(usuario, domain);
+        return ResponseEntity.noContent().build();
     }
 }

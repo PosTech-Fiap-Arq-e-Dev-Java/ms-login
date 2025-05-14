@@ -9,5 +9,6 @@ public interface GetLoginOutputPort {
     Optional<LoginDomain> find(String usuario);
     Optional<LoginDomain> findByUsuarioOrDocumento(String usuario, String documento);
     Optional<LoginDomain> findUsuarioStatusByUsuario(String usuario);
+    Optional<LoginDomain> findUsuarioSenhaByUsuario(String usuario, String senha);
 
 }

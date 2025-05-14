@@ -23,6 +23,7 @@ public class LoginEntity {
 
     @Column(unique = true)
     private String usuario;
+
     private String senha;
 
     @Column(unique = true)

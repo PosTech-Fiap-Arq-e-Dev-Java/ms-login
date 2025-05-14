@@ -4,21 +4,19 @@ import com.fiap.ms.login.application.core.domain.LoginDomain;
 import com.fiap.ms.login.application.core.domain.enums.StatusUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.exception.UserAlreadyExistsException;
-import com.fiap.ms.login.application.ports.in.AuthRegisterInputPort;
-import com.fiap.ms.login.application.ports.out.AuthRegisterOutputPort;
+import com.fiap.ms.login.application.ports.in.InsertLoginInputPort;
+import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
 import com.fiap.ms.login.application.ports.out.GetLoginOutputPort;
 
-import java.util.Optional;
+public class InsertLoginUseCase implements InsertLoginInputPort {
 
-public class AuthRegisterUseCase implements AuthRegisterInputPort {
-
-    private final AuthRegisterOutputPort authRegisterOutputPort;
+    private final InsertLoginOutputPort insertLoginOutputPort;
     private final GetLoginOutputPort getLoginOutputPort;
 
 
-    public AuthRegisterUseCase(AuthRegisterOutputPort authRegisterOutputPort,
-                               GetLoginOutputPort getLoginOutputPort) {
-        this.authRegisterOutputPort = authRegisterOutputPort;
+    public InsertLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
+                              GetLoginOutputPort getLoginOutputPort) {
+        this.insertLoginOutputPort = insertLoginOutputPort;
         this.getLoginOutputPort = getLoginOutputPort;
     }
 
@@ -31,6 +29,6 @@ public class AuthRegisterUseCase implements AuthRegisterInputPort {
 
         customer.setStatusUsuario(StatusUsuarioEnum.ATIVO);
         customer.setTipoUsuario(TipoUsuarioEnum.CLIENTE);
-        authRegisterOutputPort.insert(customer);
+        insertLoginOutputPort.insert(customer);
     }
 }
