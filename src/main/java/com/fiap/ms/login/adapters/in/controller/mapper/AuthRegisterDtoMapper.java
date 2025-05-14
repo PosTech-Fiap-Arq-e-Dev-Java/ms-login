@@ -15,5 +15,6 @@ public interface AuthRegisterDtoMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "tipoUsuario", ignore = true)
     @Mapping(target = "statusUsuario", ignore = true)
+    @Mapping(target = "documento", source = "documento")
     LoginDomain toLogin(AuthRegisterDto authRegisterDto);
 }
