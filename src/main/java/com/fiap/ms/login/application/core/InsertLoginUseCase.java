@@ -24,7 +24,7 @@ public class InsertLoginUseCase implements InsertLoginInputPort {
     public void insert(LoginDomain customer) {
         getLoginOutputPort.findByUsuarioOrDocumento(customer.getUsuario(), customer.getDocumento())
                 .ifPresent(login -> {
-                    throw new UserAlreadyExistsException("User already exists");
+                    throw new UserAlreadyExistsException();
                 });
 
         customer.setStatusUsuario(StatusUsuarioEnum.ATIVO);

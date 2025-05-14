@@ -1,6 +1,7 @@
 package com.fiap.ms.login.application.core;
 
 import com.fiap.ms.login.application.core.domain.LoginDomain;
+import com.fiap.ms.login.application.core.domain.exception.UserNotFoundException;
 import com.fiap.ms.login.application.ports.in.GetLoginInputPort;
 import com.fiap.ms.login.application.ports.out.GetLoginOutputPort;
 
@@ -15,6 +16,6 @@ public class GetLoginUseCase implements GetLoginInputPort {
     @Override
     public LoginDomain find(String usuario) {
         return getLoginOutputPort.findUsuarioStatusByUsuario(usuario)
-                .orElseThrow(() -> new RuntimeException("Login not found"));
+                .orElseThrow(() -> new UserNotFoundException(usuario));
     }
 }
