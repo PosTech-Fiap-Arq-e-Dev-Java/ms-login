@@ -4,6 +4,7 @@ import com.fiap.ms.login.LoginApi;
 import com.fiap.ms.login.adapters.in.controller.mapper.AuthRegisterDtoMapper;
 import com.fiap.ms.login.application.ports.in.AuthRegisterInputPort;
 import com.fiap.ms.login.application.ports.in.DeleteLoginInputPort;
+import com.fiap.ms.login.application.ports.in.GetLoginInputPort;
 import com.fiap.ms.login.gen.model.AuthLoginDto;
 import com.fiap.ms.login.gen.model.AuthRegisterDto;
 import com.fiap.ms.login.gen.model.AuthStatusDto;
@@ -21,14 +22,14 @@ public class LoginController implements LoginApi {
 
     private final AuthRegisterInputPort authRegisterInputPort;
     private final DeleteLoginInputPort deleteLoginInputPort;
-    private final AuthRegisterDtoMapper authRegisterDtoMapper;
+    private final GetLoginInputPort getLoginInputPort;
 
     public LoginController(AuthRegisterInputPort authRegisterInputPort,
                            DeleteLoginInputPort deleteLoginInputPort,
-                           AuthRegisterDtoMapper authRegisterDtoMapper) {
+                           GetLoginInputPort getLoginInputPort) {
         this.authRegisterInputPort = authRegisterInputPort;
         this.deleteLoginInputPort = deleteLoginInputPort;
-        this.authRegisterDtoMapper = authRegisterDtoMapper;
+        this.getLoginInputPort = getLoginInputPort;
     }
 
     @Override
@@ -39,14 +40,20 @@ public class LoginController implements LoginApi {
 
     @Override
     public ResponseEntity<Void> _authRegister(AuthRegisterDto authRegisterRequestDto) {
-        var login = authRegisterDtoMapper.toLogin(authRegisterRequestDto);
+        var login = AuthRegisterDtoMapper.INSTANCE.toLogin(authRegisterRequestDto);
         authRegisterInputPort.insert(login);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Override
     public ResponseEntity<AuthStatusDto> _authStatus(String usuario) {
-        return null;
+        var status = getLoginInputPort.find(usuario);
+
+        AuthStatusDto statusDto = new AuthStatusDto();
+        statusDto.setStatus(status.getStatusUsuario().getStatus());
+        statusDto.setUsuario(status.getUsuario());
+
+        return ResponseEntity.ok(statusDto);
     }
 
     @Override

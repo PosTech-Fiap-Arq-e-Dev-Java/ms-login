@@ -17,7 +17,7 @@ import java.util.Arrays;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface LoginEntityMapper {
 
-    AuthRegisterDtoMapper INSTANCE = Mappers.getMapper(AuthRegisterDtoMapper.class);
+    LoginEntityMapper INSTANCE = Mappers.getMapper(LoginEntityMapper.class);
 
     @Mapping(source = "tipoUsuario", target = "tipoUsuario")
     LoginEntity toLoginEntity(LoginDomain loginDomain);

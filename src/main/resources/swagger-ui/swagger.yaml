@@ -127,6 +127,9 @@ components:
     AuthStatus:
       type: object
       properties:
+        usuario:
+          type: string
+          example: fulano
         status:
           type: string
           example: "ativo"

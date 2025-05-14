@@ -1,5 +1,6 @@
-package com.fiap.ms.login.adapters.out.repository;
+package com.fiap.ms.login.adapters.out;
 
+import com.fiap.ms.login.adapters.out.repository.LoginRepository;
 import com.fiap.ms.login.application.ports.out.DeleteLoginOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
