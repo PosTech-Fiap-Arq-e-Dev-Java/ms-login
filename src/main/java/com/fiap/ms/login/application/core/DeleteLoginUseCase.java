@@ -1,5 +1,6 @@
 package com.fiap.ms.login.application.core;
 
+import com.fiap.ms.login.application.core.domain.exception.UserNotFoundException;
 import com.fiap.ms.login.application.ports.in.DeleteLoginInputPort;
 import com.fiap.ms.login.application.ports.out.DeleteLoginOutputPort;
 import com.fiap.ms.login.application.ports.out.GetLoginOutputPort;
@@ -16,9 +17,9 @@ public class DeleteLoginUseCase implements DeleteLoginInputPort {
     }
 
     @Override
-    public void delete(String cpf) {
-        var login = getLoginOutputPort.find(cpf)
-                .orElseThrow(() -> new RuntimeException("Login not found"));
+    public void delete(String usuario) {
+        var login = getLoginOutputPort.find(usuario)
+                .orElseThrow(() -> new UserNotFoundException(usuario));
         deleteLoginOutputPort.delete(login.getId());
     }
 }

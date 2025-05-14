@@ -8,6 +8,80 @@ tags:
     description: Endpoints relacionados à autenticação
 
 paths:
+  /auth/login:
+    get:
+      tags:
+        - Login
+      operationId: AuthStatus
+      summary: Consulta login por usuário
+      parameters:
+        - name: usuario
+          in: query
+          description: usuario
+          required: true
+          schema:
+            type: string
+            example: "fulano"
+      responses:
+        '200':
+          description: Consulta realizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthStatus'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      tags:
+        - Login
+      summary: Realizar login
+      operationId: AuthLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthLogin'
+      responses:
+        '200':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginResponse'
+        '401':
+          description: Credenciais inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidCredentials:
+                  summary: Usuário ou senha incorretos
+                  value:
+                    timestamp: "2025-05-14T15:42:00Z"
+                    status: 401
+                    error: "Unauthorized"
+                    message: "Usuário ou senha inválidos"
+                    path: "/auth/login"
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /auth/registration:
     post:
       tags:
@@ -23,31 +97,33 @@ paths:
       responses:
         '201':
           description: Login criado com sucesso
+        '400':
+          description: Requisição inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Usuário ou documento já existente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /auth/login:
-    post:
-      tags:
-        - Login
-      summary: Realizar login
-      operationId: AuthLogin
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthLogin'
-      responses:
-        '200':
-          description: Login realizado com sucesso
-
-  /login/{cpf}:
+  /login/{usuario}:
     patch:
       tags:
         - Login
       summary: Atualizar senha de usuário
       operationId: UpdatePassword
       parameters:
-        - name: cpf
+        - name: usuario
           in: path
           required: true
           schema:
@@ -61,6 +137,30 @@ paths:
       responses:
         '200':
           description: Senha atualizada com sucesso
+        '400':
+          description: Requisição inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Senha antiga incorreta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
     delete:
       tags:
@@ -68,14 +168,26 @@ paths:
       summary: Deletar login de usuário
       operationId: DeleteLogin
       parameters:
-        - name: cpf
+        - name: usuario
           in: path
           required: true
           schema:
             type: string
       responses:
         '204':
-          description: Login deletado com sucesso
+          description: Login deletado com sucesso (sem conteúdo)
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
 components:
   schemas:
@@ -84,14 +196,17 @@ components:
       required:
         - usuario
         - senha
-        - cpf
+        - documento
       properties:
         usuario:
           type: string
+          example: "fulano"
         senha:
           type: string
-        cpf:
+          example: "senha123"
+        documento:
           type: string
+          example: "12312312332"
 
     AuthLogin:
       type: object
@@ -101,8 +216,30 @@ components:
       properties:
         usuario:
           type: string
+          example: "fulano"
         senha:
           type: string
+          example: "senha123"
+
+    AuthLoginResponse:
+      type: object
+      properties:
+        usuario:
+          type: string
+          example: fulano
+        tipoUsuario:
+          type: string
+          example: "cliente"
+
+    AuthStatus:
+      type: object
+      properties:
+        usuario:
+          type: string
+          example: fulano
+        status:
+          type: string
+          example: "ativo"
 
     UpdatePassword:
       type: object
@@ -112,5 +249,27 @@ components:
       properties:
         senhaAntiga:
           type: string
+          example: "senhaAntiga123"
         senhaNova:
           type: string
+          example: "senhaNova123"
+
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-05-14T15:42:00Z"
+        status:
+          type: integer
+          example: 404
+        error:
+          type: string
+          example: "Not Found"
+        message:
+          type: string
+          example: "Usuário não encontrado"
+        path:
+          type: string
+          example: "/auth/login"
