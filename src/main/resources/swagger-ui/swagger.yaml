@@ -12,8 +12,8 @@ paths:
     get:
       tags:
         - Login
-      operationId: AuthStatus
-      summary: Consulta login por usuário
+      operationId: BuscarStatus
+      summary: Consulta status do login por usuário
       parameters:
         - name: usuario
           in: query
@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthStatus'
+                $ref: '#/components/schemas/StatusUsuario'
         '404':
           description: Usuário não encontrado
           content:
@@ -45,21 +45,21 @@ paths:
     post:
       tags:
         - Login
-      summary: Realizar login
-      operationId: AuthLogin
+      summary: Realizar autenticação
+      operationId: AutenticarUsuario
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthLogin'
+              $ref: '#/components/schemas/AutenticacaoUsuario'
       responses:
         '200':
           description: Login realizado com sucesso
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthLoginResponse'
+                $ref: '#/components/schemas/AutenticacaoUsuarioResponse'
         '401':
           description: Credenciais inválidas
           content:
@@ -87,13 +87,13 @@ paths:
       tags:
         - Login
       summary: Criar login de usuário
-      operationId: AuthRegister
+      operationId: CriarLogin
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthRegister'
+              $ref: '#/components/schemas/Usuario'
       responses:
         '201':
           description: Login criado com sucesso
@@ -121,7 +121,7 @@ paths:
       tags:
         - Login
       summary: Atualizar senha de usuário
-      operationId: UpdatePassword
+      operationId: AtualizarSenha
       parameters:
         - name: usuario
           in: path
@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePassword'
+              $ref: '#/components/schemas/AtualizarSenha'
       responses:
         '200':
           description: Senha atualizada com sucesso
@@ -166,7 +166,7 @@ paths:
       tags:
         - Login
       summary: Deletar login de usuário
-      operationId: DeleteLogin
+      operationId: DeletarLogin
       parameters:
         - name: usuario
           in: path
@@ -191,7 +191,7 @@ paths:
 
 components:
   schemas:
-    AuthRegister:
+    Usuario:
       type: object
       required:
         - usuario
@@ -208,7 +208,7 @@ components:
           type: string
           example: "12312312332"
 
-    AuthLogin:
+    AutenticacaoUsuario:
       type: object
       required:
         - usuario
@@ -221,7 +221,7 @@ components:
           type: string
           example: "senha123"
 
-    AuthLoginResponse:
+    AutenticacaoUsuarioResponse:
       type: object
       properties:
         usuario:
@@ -231,7 +231,7 @@ components:
           type: string
           example: "cliente"
 
-    AuthStatus:
+    StatusUsuario:
       type: object
       properties:
         usuario:
@@ -241,7 +241,7 @@ components:
           type: string
           example: "ativo"
 
-    UpdatePassword:
+    AtualizarSenha:
       type: object
       required:
         - senhaAntiga

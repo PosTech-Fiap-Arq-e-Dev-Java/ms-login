@@ -1,35 +1,35 @@
 package com.fiap.ms.login.application.core;
 
-import com.fiap.ms.login.application.core.domain.LoginDomain;
+import com.fiap.ms.login.application.core.domain.UsuarioDomain;
 import com.fiap.ms.login.application.core.domain.enums.StatusUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.exception.DocumentoInvalidoException;
-import com.fiap.ms.login.application.core.domain.exception.UserAlreadyExistsException;
-import com.fiap.ms.login.application.ports.in.InsertLoginInputPort;
+import com.fiap.ms.login.application.core.domain.exception.UsuarioJaExisteException;
+import com.fiap.ms.login.application.ports.in.InserirLoginInputPort;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
 import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
-import com.fiap.ms.login.application.ports.out.GetLoginOutputPort;
+import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
 
-public class InsertLoginUseCase implements InsertLoginInputPort {
+public class InserirLoginUseCase implements InserirLoginInputPort {
 
     private final InsertLoginOutputPort insertLoginOutputPort;
-    private final GetLoginOutputPort getLoginOutputPort;
+    private final BuscarUsuarioOutputPort buscarUsuarioOutputPort;
     private final ValidadorDocumentoInputPort validadorDocumentoInputPort;
 
 
-    public InsertLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
-                              GetLoginOutputPort getLoginOutputPort,
-                              ValidadorDocumentoInputPort validadorDocumentoInputPort) {
+    public InserirLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
+                               BuscarUsuarioOutputPort buscarUsuarioOutputPort,
+                               ValidadorDocumentoInputPort validadorDocumentoInputPort) {
         this.insertLoginOutputPort = insertLoginOutputPort;
-        this.getLoginOutputPort = getLoginOutputPort;
+        this.buscarUsuarioOutputPort = buscarUsuarioOutputPort;
         this.validadorDocumentoInputPort = validadorDocumentoInputPort;
     }
 
     @Override
-    public void insert(LoginDomain customer) {
-        getLoginOutputPort.findByUsuarioOrDocumento(customer.getUsuario(), customer.getDocumento())
+    public void inserir(UsuarioDomain customer) {
+        buscarUsuarioOutputPort.buscarUsuarioOuDocumento(customer.getUsuario(), customer.getDocumento())
                 .ifPresent(login -> {
-                    throw new UserAlreadyExistsException();
+                    throw new UsuarioJaExisteException();
                 });
 
         if(!validadorDocumentoInputPort.isValido(customer.getDocumento())){

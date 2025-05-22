@@ -3,7 +3,7 @@ package com.fiap.ms.login.application.core.domain;
 import com.fiap.ms.login.application.core.domain.enums.StatusUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 
-public class LoginDomain {
+public class UsuarioDomain {
 
     private Integer id;
     private String usuario;
@@ -12,10 +12,10 @@ public class LoginDomain {
     private TipoUsuarioEnum tipoUsuarioEnum;
     private StatusUsuarioEnum statusUsuarioEnum;
 
-    public LoginDomain(){
+    public UsuarioDomain(){
     }
 
-    public LoginDomain(Integer id, String usuario, String senha, String documento, TipoUsuarioEnum tipoUsuarioEnum, StatusUsuarioEnum statusUsuarioEnum) {
+    public UsuarioDomain(Integer id, String usuario, String senha, String documento, TipoUsuarioEnum tipoUsuarioEnum, StatusUsuarioEnum statusUsuarioEnum) {
         this.id = id;
         this.usuario = usuario;
         this.senha = senha;
