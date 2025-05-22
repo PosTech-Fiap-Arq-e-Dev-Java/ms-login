@@ -1,7 +1,7 @@
 package com.fiap.ms.login.adapters.in.controller.mapper;
 
-import com.fiap.ms.login.application.core.domain.LoginDomain;
-import com.fiap.ms.login.gen.model.AuthRegisterDto;
+import com.fiap.ms.login.application.core.domain.UsuarioDomain;
+import com.fiap.ms.login.gen.model.UsuarioDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -16,5 +16,5 @@ public interface AuthRegisterDtoMapper {
     @Mapping(target = "tipoUsuario", ignore = true)
     @Mapping(target = "statusUsuario", ignore = true)
     @Mapping(target = "documento", source = "documento")
-    LoginDomain toLogin(AuthRegisterDto authRegisterDto);
+    UsuarioDomain toLogin(UsuarioDto authRegisterDto);
 }

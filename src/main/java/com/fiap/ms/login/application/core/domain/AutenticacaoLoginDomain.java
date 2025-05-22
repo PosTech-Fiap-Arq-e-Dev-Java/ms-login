@@ -2,15 +2,15 @@ package com.fiap.ms.login.application.core.domain;
 
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 
-public class AuthLoginDomain {
+public class AutenticacaoLoginDomain {
 
     private String usuario;
     private TipoUsuarioEnum tipoUsuarioEnum;
 
-    public AuthLoginDomain(){
+    public AutenticacaoLoginDomain(){
     }
 
-    public AuthLoginDomain(String usuario, TipoUsuarioEnum tipoUsuarioEnum) {
+    public AutenticacaoLoginDomain(String usuario, TipoUsuarioEnum tipoUsuarioEnum) {
         this.usuario = usuario;
         this.tipoUsuarioEnum = tipoUsuarioEnum;
     }

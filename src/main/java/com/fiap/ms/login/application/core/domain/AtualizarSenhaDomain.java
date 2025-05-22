@@ -1,14 +1,14 @@
 package com.fiap.ms.login.application.core.domain;
 
-public class UpdatePasswordDomain {
+public class AtualizarSenhaDomain {
 
     private String senhaAntiga;
     private String senhaNova;
 
-    public UpdatePasswordDomain(){
+    public AtualizarSenhaDomain(){
     }
 
-    public UpdatePasswordDomain(String senhaAntiga, String senhaNova) {
+    public AtualizarSenhaDomain(String senhaAntiga, String senhaNova) {
         this.senhaAntiga = senhaAntiga;
         this.senhaNova = senhaNova;
     }

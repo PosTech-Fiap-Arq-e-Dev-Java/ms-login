@@ -3,7 +3,7 @@ package com.fiap.ms.login.adapters.out.repository.mapper;
 import com.fiap.ms.login.adapters.out.repository.entity.LoginEntity;
 import com.fiap.ms.login.adapters.out.repository.entity.StatusUsuarioEntity;
 import com.fiap.ms.login.adapters.out.repository.entity.TipoUsuarioEntity;
-import com.fiap.ms.login.application.core.domain.LoginDomain;
+import com.fiap.ms.login.application.core.domain.UsuarioDomain;
 import com.fiap.ms.login.application.core.domain.enums.StatusUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 import org.mapstruct.Mapper;
@@ -19,10 +19,10 @@ public interface LoginEntityMapper {
     LoginEntityMapper INSTANCE = Mappers.getMapper(LoginEntityMapper.class);
 
     @Mapping(source = "tipoUsuario", target = "tipoUsuario")
-    LoginEntity toLoginEntity(LoginDomain loginDomain);
+    LoginEntity toLoginEntity(UsuarioDomain usuarioDomain);
 
     @Mapping(source = "tipoUsuario", target = "tipoUsuario")
-    LoginDomain toLogin(LoginEntity loginEntity);
+    UsuarioDomain toLoginDomain(LoginEntity loginEntity);
 
     default TipoUsuarioEntity map(TipoUsuarioEnum tipoUsuarioEnum) {
         if (tipoUsuarioEnum == null) return null;
