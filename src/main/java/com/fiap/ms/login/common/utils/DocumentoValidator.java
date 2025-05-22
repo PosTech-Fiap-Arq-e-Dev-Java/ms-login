@@ -4,9 +4,9 @@ public class DocumentoValidator {
 
     public static boolean isValid(String documento) {
         if (documento.length() == 11) {
-            return CPFValidator.isValid(documento);
+            return CPFValidador.isValido(documento);
         } else if (documento.length() == 14) {
-            return CNPJValidator.isValid(documento);
+            return CNPJValidador.isValido(documento);
         }
         return false;
     }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class BuscarUsuarioAdapter implements BuscarUsuarioOutputPort {
 
     private final LoginRepository repository;

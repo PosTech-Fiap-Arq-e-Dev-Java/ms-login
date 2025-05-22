@@ -7,20 +7,20 @@ import com.fiap.ms.login.application.core.domain.exception.DocumentoInvalidoExce
 import com.fiap.ms.login.application.core.domain.exception.UsuarioJaExisteException;
 import com.fiap.ms.login.application.ports.in.InserirLoginInputPort;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
-import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
+import com.fiap.ms.login.application.ports.out.InserirLoginOutputPort;
 import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
 
 public class InserirLoginUseCase implements InserirLoginInputPort {
 
-    private final InsertLoginOutputPort insertLoginOutputPort;
+    private final InserirLoginOutputPort inserirLoginOutputPort;
     private final BuscarUsuarioOutputPort buscarUsuarioOutputPort;
     private final ValidadorDocumentoInputPort validadorDocumentoInputPort;
 
 
-    public InserirLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
+    public InserirLoginUseCase(InserirLoginOutputPort inserirLoginOutputPort,
                                BuscarUsuarioOutputPort buscarUsuarioOutputPort,
                                ValidadorDocumentoInputPort validadorDocumentoInputPort) {
-        this.insertLoginOutputPort = insertLoginOutputPort;
+        this.inserirLoginOutputPort = inserirLoginOutputPort;
         this.buscarUsuarioOutputPort = buscarUsuarioOutputPort;
         this.validadorDocumentoInputPort = validadorDocumentoInputPort;
     }
@@ -43,6 +43,6 @@ public class InserirLoginUseCase implements InserirLoginInputPort {
         }
 
         customer.setStatusUsuario(StatusUsuarioEnum.ATIVO);
-        insertLoginOutputPort.insert(customer);
+        inserirLoginOutputPort.inserir(customer);
     }
 }

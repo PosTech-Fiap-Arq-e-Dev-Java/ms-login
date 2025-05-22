@@ -1,7 +1,6 @@
 package com.fiap.ms.login.adapters.in.controller.handler;
 
-import com.fiap.ms.login.application.core.domain.exception.CNPJInvalidoException;
-import com.fiap.ms.login.application.core.domain.exception.CPFInvalidoException;
+import com.fiap.ms.login.application.core.domain.exception.CPFCNPJInvalidoException;
 import com.fiap.ms.login.application.core.domain.exception.CampoObrigatorioException;
 import com.fiap.ms.login.application.core.domain.exception.DocumentoInvalidoException;
 import com.fiap.ms.login.application.core.domain.exception.CredenciaisInvalidasException;
@@ -21,7 +20,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(UsuarioJaExisteException.class)
-    public ResponseEntity<Object> handleUserAlreadyExists(UsuarioJaExisteException ex, WebRequest request) {
+    public ResponseEntity<Object> handleUsuarioJaExisteException(UsuarioJaExisteException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", OffsetDateTime.now());
@@ -34,8 +33,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CredenciaisInvalidasException.class)
-    public ResponseEntity<Object> handleInvalidCredentials(
-            CredenciaisInvalidasException ex, WebRequest request) {
+    public ResponseEntity<Object> handleCredenciaisInvalidasException(CredenciaisInvalidasException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", OffsetDateTime.now());
@@ -48,8 +46,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ResponseEntity<Object> handleUserNotFound(
-            UsuarioNaoEncontradoException ex, WebRequest request) {
+    public ResponseEntity<Object> handleUsuarioNaoEncontradoException(UsuarioNaoEncontradoException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", OffsetDateTime.now());
@@ -61,21 +58,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(CNPJInvalidoException.class)
-    public ResponseEntity<Object> handleCNPJInvalidoException(CNPJInvalidoException ex, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", OffsetDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", "Bad Request");
-        body.put("message", ex.getReason());
-        body.put("path", request.getDescription(false).replace("uri=", ""));
-
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(CPFInvalidoException.class)
-    public ResponseEntity<Object> handleCPFInvalidoException(CPFInvalidoException ex, WebRequest request) {
+    @ExceptionHandler(CPFCNPJInvalidoException.class)
+    public ResponseEntity<Object> handleCPFCNPJInvalidoException(CPFCNPJInvalidoException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", OffsetDateTime.now());

@@ -2,7 +2,7 @@ package com.fiap.ms.login.adapters.in.controller;
 
 import com.fiap.ms.login.LoginApi;
 import com.fiap.ms.login.adapters.in.controller.mapper.AtualizarSenhadMapper;
-import com.fiap.ms.login.adapters.in.controller.mapper.AuthRegisterDtoMapper;
+import com.fiap.ms.login.adapters.in.controller.mapper.UsuarioDtoMapper;
 import com.fiap.ms.login.application.ports.in.AtualizarSenhaInputPort;
 import com.fiap.ms.login.application.ports.in.AutenticarLoginInputPort;
 import com.fiap.ms.login.application.ports.in.BuscarUsuarioInputPort;
@@ -71,7 +71,7 @@ public class LoginController implements LoginApi {
 
     @Override
     public ResponseEntity<Void> _criarLogin(UsuarioDto usuarioDto) {
-        var login = AuthRegisterDtoMapper.INSTANCE.toLogin(usuarioDto);
+        var login = UsuarioDtoMapper.INSTANCE.toLogin(usuarioDto);
         inserirLoginInputPort.inserir(login);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

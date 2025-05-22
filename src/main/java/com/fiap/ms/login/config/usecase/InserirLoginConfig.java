@@ -2,7 +2,7 @@ package com.fiap.ms.login.config.usecase;
 
 import com.fiap.ms.login.application.core.InserirLoginUseCase;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
-import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
+import com.fiap.ms.login.application.ports.out.InserirLoginOutputPort;
 import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 public class InserirLoginConfig {
 
     @Bean
-    public InserirLoginUseCase inserirLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
+    public InserirLoginUseCase inserirLoginUseCase(InserirLoginOutputPort inserirLoginOutputPort,
                                                    BuscarUsuarioOutputPort buscarUsuarioOutputPort,
                                                    ValidadorDocumentoInputPort validadorDocumentoInputPort){
-        return new InserirLoginUseCase(insertLoginOutputPort, buscarUsuarioOutputPort, validadorDocumentoInputPort);
+        return new InserirLoginUseCase(inserirLoginOutputPort, buscarUsuarioOutputPort, validadorDocumentoInputPort);
     }
 }
