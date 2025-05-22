@@ -2,17 +2,17 @@ package com.fiap.ms.login.application.core;
 
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
-import com.fiap.ms.login.common.utils.CNPJValidator;
-import com.fiap.ms.login.common.utils.CPFValidator;
+import com.fiap.ms.login.common.utils.CNPJValidador;
+import com.fiap.ms.login.common.utils.CPFValidador;
 
 public class ValidadorDocumentoUsecase implements ValidadorDocumentoInputPort {
 
     @Override
     public boolean isValido(String numero) {
         if (numero.length() == 11) {
-            return CPFValidator.isValid(numero);
+            return CPFValidador.isValido(numero);
         } else if (numero.length() == 14) {
-            return CNPJValidator.isValid(numero);
+            return CNPJValidador.isValido(numero);
         }
         return false;
     }

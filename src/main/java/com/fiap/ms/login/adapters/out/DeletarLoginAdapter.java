@@ -3,17 +3,17 @@ package com.fiap.ms.login.adapters.out;
 import com.fiap.ms.login.adapters.out.repository.LoginRepository;
 import com.fiap.ms.login.application.ports.out.DeletarLoginOutputPort;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DeletarLoginAdapter implements DeletarLoginOutputPort {
 
-    @Autowired
-    private LoginRepository loginRepository;
+    private final LoginRepository loginRepository;
 
-    @Transactional
     @Override
+    @Transactional
     public void deletar(Integer id) {
         loginRepository.deleteById(id);
     }

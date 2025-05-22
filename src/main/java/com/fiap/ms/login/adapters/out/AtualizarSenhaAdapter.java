@@ -4,14 +4,14 @@ import com.fiap.ms.login.adapters.out.repository.LoginRepository;
 import com.fiap.ms.login.adapters.out.repository.mapper.LoginEntityMapper;
 import com.fiap.ms.login.application.core.domain.UsuarioDomain;
 import com.fiap.ms.login.application.ports.out.AtualizarSenhaOutputPort;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class AtualizarSenhaAdapter implements AtualizarSenhaOutputPort {
 
-    @Autowired
-    private LoginRepository loginRepository;
+    private final LoginRepository loginRepository;
 
     @Override
     public void atualizar(UsuarioDomain usuarioDomain) {
