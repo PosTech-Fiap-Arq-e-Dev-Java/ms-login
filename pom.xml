@@ -10,7 +10,7 @@
 
 	<groupId>com.fiap</groupId>
 	<artifactId>ms.login</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>ms-login</name>
 	<description>Projeto desenvolvido para a pós graduação em Arquitetura e Desenvolvimento Java</description>
 

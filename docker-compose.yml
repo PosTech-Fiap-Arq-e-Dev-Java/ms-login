@@ -1,0 +1,35 @@
+services:
+  mysql-login:
+    image: mysql:8.3
+    container_name: container-mysql-db-ms-login
+    ports:
+      - "3306:3306"
+    networks:
+      mslogin-net:
+        aliases:
+          - mysql-login
+    environment:
+      MYSQL_ROOT_PASSWORD: rootAdmMsLogin123
+      MYSQL_DATABASE: db-ms-login
+      MYSQL_USER: adm123
+      MYSQL_PASSWORD: adm123
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: container-ms-login
+    ports:
+      - "9207:9207"
+    depends_on:
+      - mysql-login
+    networks:
+      - mslogin-net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-login:3306/db-ms-login?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: adm123
+      SPRING_DATASOURCE_PASSWORD: adm123
+
+networks:
+  mslogin-net:
+    driver: bridge
