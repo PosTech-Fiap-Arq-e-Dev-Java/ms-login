@@ -59,26 +59,20 @@ cd ms-login
 ./mvnw clean package
 
 ```
-### 3. Compile a aplicação com o Maven
-
-```bash
-./mvnw clean package
-
-```
-### 4. Dê permissão de execução ao script de espera
+### 3. Dê permissão de execução ao script de espera
 
 ```bash
 chmod +x wait-for-it.sh
 chmod +x entrypoint.sh
 
 ```
-### 5. Crie a rede externa manualmente
+### 4. Crie a rede externa manualmente
 
 ```bash
 docker network create mslogin-net
 
 ```
-### 6. Suba os containers com Docker Compose
+### 5. Suba os containers com Docker Compose
 
 ```bash
 docker-compose up --build
