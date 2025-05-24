@@ -1,12 +1,6 @@
 package com.fiap.ms.login.adapters.in.controller.handler;
 
-import com.fiap.ms.login.application.core.domain.exception.CNPJInvalidoException;
-import com.fiap.ms.login.application.core.domain.exception.CPFInvalidoException;
-import com.fiap.ms.login.application.core.domain.exception.CampoObrigatorioException;
-import com.fiap.ms.login.application.core.domain.exception.DocumentoInvalidoException;
-import com.fiap.ms.login.application.core.domain.exception.CredenciaisInvalidasException;
-import com.fiap.ms.login.application.core.domain.exception.UsuarioJaExisteException;
-import com.fiap.ms.login.application.core.domain.exception.UsuarioNaoEncontradoException;
+import com.fiap.ms.login.application.core.domain.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -103,6 +97,30 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CampoObrigatorioException.class)
     public ResponseEntity<Object> handleCampoObrigatorio(CampoObrigatorioException ex, WebRequest request) {
 
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", OffsetDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("error", "BAD_REQUEST");
+        body.put("message", ex.getReason());
+        body.put("path", request.getDescription(false).replace("uri=", ""));
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SenhasIguaisException.class)
+    public ResponseEntity<Object> handleSenhasIguais(SenhasIguaisException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", OffsetDateTime.now());
+        body.put("status", HttpStatus.CONFLICT.value());
+        body.put("error", "CONFLICT");
+        body.put("message", ex.getReason());
+        body.put("path", request.getDescription(false).replace("uri=", ""));
+
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UsuarioLoginObrigatorioException.class)
+    public ResponseEntity<Object> handleLoginObrigatorio(UsuarioLoginObrigatorioException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", OffsetDateTime.now());
         body.put("status", HttpStatus.BAD_REQUEST.value());

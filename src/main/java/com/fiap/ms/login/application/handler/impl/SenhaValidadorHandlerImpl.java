@@ -2,6 +2,7 @@ package com.fiap.ms.login.application.handler.impl;
 
 import com.fiap.ms.login.application.core.domain.AtualizarSenhaDomain;
 import com.fiap.ms.login.application.core.domain.exception.CampoObrigatorioException;
+import com.fiap.ms.login.application.core.domain.exception.SenhasIguaisException;
 import com.fiap.ms.login.application.handler.SenhaValidadorHandler;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,10 @@ public class SenhaValidadorHandlerImpl implements SenhaValidadorHandler {
     public void validarTrocaDeSenha(AtualizarSenhaDomain atualizarSenhaDomain) {
         if(Objects.isNull(atualizarSenhaDomain) || atualizarSenhaDomain.getSenhaNova().isBlank()) {
             throw new CampoObrigatorioException();
+        }
+
+        if (atualizarSenhaDomain.getSenhaAntiga().equals(atualizarSenhaDomain.getSenhaNova())) {
+            throw new SenhasIguaisException();
         }
     }
 }

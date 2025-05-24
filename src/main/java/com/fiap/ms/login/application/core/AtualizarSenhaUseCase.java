@@ -2,6 +2,8 @@ package com.fiap.ms.login.application.core;
 
 import com.fiap.ms.login.application.core.domain.AtualizarSenhaDomain;
 import com.fiap.ms.login.application.core.domain.exception.CredenciaisInvalidasException;
+import com.fiap.ms.login.application.core.domain.exception.UsuarioLoginObrigatorioException;
+import com.fiap.ms.login.application.core.domain.exception.UsuarioNaoEncontradoException;
 import com.fiap.ms.login.application.handler.SenhaValidadorHandler;
 import com.fiap.ms.login.application.ports.in.AtualizarSenhaInputPort;
 import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
@@ -23,10 +25,14 @@ public class AtualizarSenhaUseCase implements AtualizarSenhaInputPort {
 
     @Override
     public void atualizar(String usuario, AtualizarSenhaDomain atualizarSenhaDomain) {
-        var usuarioDomain = buscarUsuarioOutputPort.buscarUsuarioESenha(usuario, atualizarSenhaDomain.getSenhaAntiga())
-                .orElseThrow(CredenciaisInvalidasException::new);
+        if(usuario == null || usuario.isBlank()){
+            throw new UsuarioLoginObrigatorioException();
+        }
 
         senhaValidadorHandler.validarTrocaDeSenha(atualizarSenhaDomain);
+
+        var usuarioDomain = buscarUsuarioOutputPort.buscarUsuarioESenha(usuario, atualizarSenhaDomain.getSenhaAntiga())
+                .orElseThrow(CredenciaisInvalidasException::new);
 
         usuarioDomain.setSenha(atualizarSenhaDomain.getSenhaNova());
         atualizarSenhaOutputPort.atualizar(usuarioDomain);
