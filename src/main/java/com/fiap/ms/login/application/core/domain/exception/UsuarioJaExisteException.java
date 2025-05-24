@@ -6,6 +6,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class UsuarioJaExisteException extends ResponseStatusException {
 
     public UsuarioJaExisteException() {
-        super(HttpStatus.CONFLICT, "Usuário já existe.");
+        super(HttpStatus.CONFLICT, "Usuário ou Documento já existe.");
     }
 }
