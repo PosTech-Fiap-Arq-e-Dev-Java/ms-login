@@ -3,7 +3,6 @@ package com.fiap.ms.login.application.core;
 import com.fiap.ms.login.application.core.domain.AtualizarSenhaDomain;
 import com.fiap.ms.login.application.core.domain.exception.CredenciaisInvalidasException;
 import com.fiap.ms.login.application.core.domain.exception.UsuarioLoginObrigatorioException;
-import com.fiap.ms.login.application.core.domain.exception.UsuarioNaoEncontradoException;
 import com.fiap.ms.login.application.handler.SenhaValidadorHandler;
 import com.fiap.ms.login.application.ports.in.AtualizarSenhaInputPort;
 import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
