@@ -1,6 +1,7 @@
 package com.fiap.ms.login.config.usecase;
 
 import com.fiap.ms.login.application.core.InserirLoginUseCase;
+import com.fiap.ms.login.application.handler.LoginValidatorHandler;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
 import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
 import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
@@ -13,7 +14,8 @@ public class InserirLoginConfig {
     @Bean
     public InserirLoginUseCase inserirLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
                                                    BuscarUsuarioOutputPort buscarUsuarioOutputPort,
+                                                   LoginValidatorHandler loginValidatorHandler,
                                                    ValidadorDocumentoInputPort validadorDocumentoInputPort){
-        return new InserirLoginUseCase(insertLoginOutputPort, buscarUsuarioOutputPort, validadorDocumentoInputPort);
+        return new InserirLoginUseCase(insertLoginOutputPort, buscarUsuarioOutputPort, loginValidatorHandler, validadorDocumentoInputPort);
     }
 }

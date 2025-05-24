@@ -5,6 +5,7 @@ import com.fiap.ms.login.application.core.domain.enums.StatusUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.enums.TipoUsuarioEnum;
 import com.fiap.ms.login.application.core.domain.exception.DocumentoInvalidoException;
 import com.fiap.ms.login.application.core.domain.exception.UsuarioJaExisteException;
+import com.fiap.ms.login.application.handler.LoginValidatorHandler;
 import com.fiap.ms.login.application.ports.in.InserirLoginInputPort;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
 import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
@@ -14,19 +15,23 @@ public class InserirLoginUseCase implements InserirLoginInputPort {
 
     private final InsertLoginOutputPort insertLoginOutputPort;
     private final BuscarUsuarioOutputPort buscarUsuarioOutputPort;
+    private final LoginValidatorHandler loginValidatorHandler;
     private final ValidadorDocumentoInputPort validadorDocumentoInputPort;
 
 
     public InserirLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
-                               BuscarUsuarioOutputPort buscarUsuarioOutputPort,
+                               BuscarUsuarioOutputPort buscarUsuarioOutputPort, LoginValidatorHandler loginValidatorHandler,
                                ValidadorDocumentoInputPort validadorDocumentoInputPort) {
         this.insertLoginOutputPort = insertLoginOutputPort;
         this.buscarUsuarioOutputPort = buscarUsuarioOutputPort;
+        this.loginValidatorHandler = loginValidatorHandler;
         this.validadorDocumentoInputPort = validadorDocumentoInputPort;
     }
 
     @Override
     public void inserir(UsuarioDomain customer) {
+        loginValidatorHandler.validarCamposObrigatoriosLogin(customer);
+
         buscarUsuarioOutputPort.buscarUsuarioOuDocumento(customer.getUsuario(), customer.getDocumento())
                 .ifPresent(login -> {
                     throw new UsuarioJaExisteException();
