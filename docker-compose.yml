@@ -32,4 +32,4 @@ services:
 
 networks:
   mslogin-net:
-    driver: bridge
+    external: true
