@@ -106,6 +106,27 @@ docker-compose up --build
 
 ---
 
+## 🧪 Carga Inicial de Dados (DataLoader)
+
+O microserviço realiza automaticamente a carga inicial de dados nas seguintes tabelas ao ser iniciado:
+
+| Tabela           | Dados Carregados                                                                                                  |
+| ---------------- |-------------------------------------------------------------------------------------------------------------------|
+| `tipo_usuario`   | Tipos de usuário definidos no `TipoUsuarioEnum` (ex: CLIENTE, PARCEIRO)                                           |
+| `status_usuario` | Status de usuário definidos no `StatusUsuarioEnum` (ex: ATIVO, INATIVO, BLÇOQUEADO, PENDENTE, EXPIRADO, SUSPENSO) |
+
+
+Essa carga é realizada através de dois componentes CommandLineRunner:
+
+- TipoUsuarioDataLoaderConfig
+- StatusUsuarioDataLoaderConfig
+
+Esses componentes garantem que os dados de referência essenciais estejam disponíveis no banco de dados assim que a aplicação é iniciada, sem a necessidade de inserções manuais.
+
+⚠️ Caso os registros já existam (mesmo ID), a aplicação não os duplica.
+
+---
+
 ## ‍💻 Autores
 
 Este projeto faz parte da Pós-graduação em Arquitetura e Desenvolvimento Java da FIAP e implementa um microserviço de login com autenticação, documentação OpenAPI e persistência de dados com MySQL, seguindo boas práticas de microsserviços.
