@@ -1,5 +1,6 @@
 package com.fiap.ms.login.application.core;
 
+import com.fiap.ms.login.application.core.domain.exception.UsuarioLoginObrigatorioException;
 import com.fiap.ms.login.application.core.domain.exception.UsuarioNaoEncontradoException;
 import com.fiap.ms.login.application.ports.in.DeletarLoginInputPort;
 import com.fiap.ms.login.application.ports.out.DeletarLoginOutputPort;
@@ -18,6 +19,10 @@ public class DeletarLoginUseCase implements DeletarLoginInputPort {
 
     @Override
     public void deletar(String usuario) {
+        if(usuario == null || usuario.isBlank()){
+            throw new UsuarioLoginObrigatorioException();
+        }
+
         var usuarioDomain = buscarUsuarioOutputPort.buscar(usuario)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException(usuario));
 
