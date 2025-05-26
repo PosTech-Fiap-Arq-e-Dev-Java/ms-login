@@ -8,21 +8,21 @@ import com.fiap.ms.login.application.core.domain.exception.UsuarioJaExisteExcept
 import com.fiap.ms.login.application.handler.LoginValidatorHandler;
 import com.fiap.ms.login.application.ports.in.InserirLoginInputPort;
 import com.fiap.ms.login.application.ports.in.ValidadorDocumentoInputPort;
-import com.fiap.ms.login.application.ports.out.InsertLoginOutputPort;
+import com.fiap.ms.login.application.ports.out.InserirLoginOutputPort;
 import com.fiap.ms.login.application.ports.out.BuscarUsuarioOutputPort;
 
 public class InserirLoginUseCase implements InserirLoginInputPort {
 
-    private final InsertLoginOutputPort insertLoginOutputPort;
+    private final InserirLoginOutputPort inserirLoginOutputPort;
     private final BuscarUsuarioOutputPort buscarUsuarioOutputPort;
     private final LoginValidatorHandler loginValidatorHandler;
     private final ValidadorDocumentoInputPort validadorDocumentoInputPort;
 
-
-    public InserirLoginUseCase(InsertLoginOutputPort insertLoginOutputPort,
-                               BuscarUsuarioOutputPort buscarUsuarioOutputPort, LoginValidatorHandler loginValidatorHandler,
-                               ValidadorDocumentoInputPort validadorDocumentoInputPort) {
-        this.insertLoginOutputPort = insertLoginOutputPort;
+    public InserirLoginUseCase(InserirLoginOutputPort inserirLoginOutputPort,
+                               BuscarUsuarioOutputPort buscarUsuarioOutputPort,
+                               ValidadorDocumentoInputPort validadorDocumentoInputPort,
+                               LoginValidatorHandler loginValidatorHandler) {
+        this.inserirLoginOutputPort = inserirLoginOutputPort;
         this.buscarUsuarioOutputPort = buscarUsuarioOutputPort;
         this.loginValidatorHandler = loginValidatorHandler;
         this.validadorDocumentoInputPort = validadorDocumentoInputPort;
@@ -48,6 +48,6 @@ public class InserirLoginUseCase implements InserirLoginInputPort {
         }
 
         customer.setStatusUsuario(StatusUsuarioEnum.ATIVO);
-        insertLoginOutputPort.insert(customer);
+        inserirLoginOutputPort.inserir(customer);
     }
 }

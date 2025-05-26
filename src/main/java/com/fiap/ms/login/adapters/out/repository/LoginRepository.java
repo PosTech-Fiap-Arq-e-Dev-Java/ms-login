@@ -18,10 +18,10 @@ public interface LoginRepository extends JpaRepository<LoginEntity, Integer> {
     Optional<LoginEntity> findByUsuarioOrDocumento(String usuario, String documento);
 
     Optional<LoginEntity> findByUsuarioAndSenha(String usuario, String senha);
-
-    @Transactional
-    @Modifying
+    
     @Query("UPDATE tb_login l SET l.senha = :senha WHERE l.usuario = :usuario")
+    @Modifying
+    @Transactional
     void atualizarSenha(@Param("usuario") String usuario, @Param("senha") String senha);
 
 }
