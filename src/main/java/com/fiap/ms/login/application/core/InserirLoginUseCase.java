@@ -18,10 +18,17 @@ public class InserirLoginUseCase implements InserirLoginInputPort {
     private final LoginValidatorHandler loginValidatorHandler;
     private final ValidadorDocumentoInputPort validadorDocumentoInputPort;
 
+<<<<<<< HEAD
     public InserirLoginUseCase(InserirLoginOutputPort inserirLoginOutputPort,
                                BuscarUsuarioOutputPort buscarUsuarioOutputPort,
                                ValidadorDocumentoInputPort validadorDocumentoInputPort,
                                LoginValidatorHandler loginValidatorHandler) {
+=======
+
+    public InserirLoginUseCase(InserirLoginOutputPort inserirLoginOutputPort,
+                               BuscarUsuarioOutputPort buscarUsuarioOutputPort,
+                               ValidadorDocumentoInputPort validadorDocumentoInputPort) {
+>>>>>>> 75fba4bed611866d2f34e9c0b774a28a2a714b35
         this.inserirLoginOutputPort = inserirLoginOutputPort;
         this.buscarUsuarioOutputPort = buscarUsuarioOutputPort;
         this.loginValidatorHandler = loginValidatorHandler;
