@@ -1,10 +1,7 @@
 package com.fiap.ms.login.adapters.in.controller.handler;
 
-<<<<<<< HEAD
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
-=======
->>>>>>> 75fba4bed611866d2f34e9c0b774a28a2a714b35
 import com.fiap.ms.login.application.core.domain.exception.CPFCNPJInvalidoException;
 import com.fiap.ms.login.application.core.domain.exception.CampoObrigatorioException;
 import com.fiap.ms.login.application.core.domain.exception.DocumentoInvalidoException;

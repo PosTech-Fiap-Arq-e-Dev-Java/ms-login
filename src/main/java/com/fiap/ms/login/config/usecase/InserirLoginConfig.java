@@ -14,8 +14,8 @@ public class InserirLoginConfig {
     @Bean
     public InserirLoginUseCase inserirLoginUseCase(InserirLoginOutputPort inserirLoginOutputPort,
                                                    BuscarUsuarioOutputPort buscarUsuarioOutputPort,
-                                                   ValidadorDocumentoInputPort validadorDocumentoInputPort,
-                                                   LoginValidatorHandler loginValidatorHandler){
-        return new InserirLoginUseCase(inserirLoginOutputPort, buscarUsuarioOutputPort, validadorDocumentoInputPort, loginValidatorHandler);
+                                                   LoginValidatorHandler loginValidatorHandler,
+                                                   ValidadorDocumentoInputPort validadorDocumentoInputPort){
+        return new InserirLoginUseCase(inserirLoginOutputPort, buscarUsuarioOutputPort, loginValidatorHandler, validadorDocumentoInputPort);
     }
 }
