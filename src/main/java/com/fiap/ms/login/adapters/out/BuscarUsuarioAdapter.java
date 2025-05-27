@@ -28,12 +28,6 @@ public class BuscarUsuarioAdapter implements BuscarUsuarioOutputPort {
     }
 
     @Override
-    public Optional<UsuarioDomain> buscarUsuarioEStatus(String usuario) {
-        var loginEntity = repository.findLoginByUsuario(usuario);
-        return loginEntity.map(LoginEntityMapper.INSTANCE::toLoginDomain);
-    }
-
-    @Override
     public Optional<UsuarioDomain> buscarUsuarioESenha(String usuario, String senha) {
         var loginEntity = repository.findByUsuarioAndSenha(usuario, senha);
         return loginEntity.map(LoginEntityMapper.INSTANCE::toLoginDomain);

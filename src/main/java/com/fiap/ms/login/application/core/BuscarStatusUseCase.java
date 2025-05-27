@@ -15,7 +15,7 @@ public class BuscarStatusUseCase implements BuscarUsuarioInputPort {
 
     @Override
     public UsuarioDomain buscar(String usuario) {
-        return buscarUsuarioOutputPort.buscarUsuarioEStatus(usuario)
+        return buscarUsuarioOutputPort.buscar(usuario)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException(usuario));
     }
 }
