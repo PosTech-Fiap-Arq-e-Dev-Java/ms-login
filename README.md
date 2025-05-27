@@ -108,7 +108,7 @@ Para explorar e testar os endpoints do microsserviço de forma visual, acesse a 
 | **Porta**    | `3306`         |
 | **Usuário**  | `adm123`       |
 | **Senha**    | `adm123`       |
-| **Database** | `dc-tc-grupo8` |
+| **Database** | `db-tc-grupo8` |
 
 ## 🗄️ Tabelas utilizadas no microsserviço
 
