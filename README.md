@@ -71,7 +71,7 @@ chmod +x entrypoint.sh
 ### 4. Crie a rede externa manualmente
 
 ```bash
-docker network create mslogin-net
+docker network create tc-grupo8-net
 
 ```
 ### 5. Suba os containers com Docker Compose
@@ -102,13 +102,13 @@ Para explorar e testar os endpoints do microsserviço de forma visual, acesse a 
 
 ## 🛢️ Banco de Dados MySQL
 
-| Configuração | Valor         |
-|--------------|---------------|
-| **Host**     | `localhost`   |
-| **Porta**    | `3306`        |
-| **Usuário**  | `adm123`      |
-| **Senha**    | `adm123`      |
-| **Database** | `db-ms-login` |
+| Configuração | Valor          |
+|--------------|----------------|
+| **Host**     | `localhost`    |
+| **Porta**    | `3306`         |
+| **Usuário**  | `adm123`       |
+| **Senha**    | `adm123`       |
+| **Database** | `dc-tc-grupo8` |
 
 ## 🗄️ Tabelas utilizadas no microsserviço
 
