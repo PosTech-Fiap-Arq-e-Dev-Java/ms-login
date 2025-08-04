@@ -141,5 +141,4 @@ Essa carga é realizada através de dois componentes CommandLineRunner:
 
 Este projeto faz parte da Pós-graduação em Arquitetura e Desenvolvimento Java da FIAP e implementa um microsserviço de login com autenticação, documentação OpenAPI e persistência de dados com MySQL, seguindo boas práticas de microsserviços.
 
-- Raysse Geise Alves Cutrim - rayssecutrim@hotmail.com 
-- Marcos Vinicius Beserra Pinho - marcos.vb.pinho@live.com
+- Raysse Geise Alves Cutrim - rayssecutrim@hotmail.com
