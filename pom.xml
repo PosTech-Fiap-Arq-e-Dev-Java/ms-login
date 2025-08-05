@@ -31,6 +31,7 @@
 		<org.mockito.version>5.10.0</org.mockito.version>
 		<lombok.version>1.18.24</lombok.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -167,6 +168,34 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/fiap/ms/loginDomain/**</exclude>
+						<exclude>com/fiap/ms/login/gen/**</exclude>
+						<exclude>com/fiap/ms/login/adapters/out/config/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>

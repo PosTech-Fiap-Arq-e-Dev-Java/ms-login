@@ -7,9 +7,9 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface AtualizarSenhadMapper {
+public interface AtualizarSenhaDtoMapper {
 
-    AtualizarSenhadMapper INSTANCE = Mappers.getMapper(AtualizarSenhadMapper.class);
+    AtualizarSenhaDtoMapper INSTANCE = Mappers.getMapper(AtualizarSenhaDtoMapper.class);
 
     AtualizarSenhaDomain toAtualizarSenhaDomain(AtualizarSenhaDto atualizarSenhaDto);
 }

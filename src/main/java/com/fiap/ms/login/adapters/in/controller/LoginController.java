@@ -1,7 +1,7 @@
 package com.fiap.ms.login.adapters.in.controller;
 
 import com.fiap.ms.login.LoginApi;
-import com.fiap.ms.login.adapters.in.controller.mapper.AtualizarSenhadMapper;
+import com.fiap.ms.login.adapters.in.controller.mapper.AtualizarSenhaDtoMapper;
 import com.fiap.ms.login.adapters.in.controller.mapper.UsuarioDtoMapper;
 import com.fiap.ms.login.application.ports.in.AtualizarSenhaInputPort;
 import com.fiap.ms.login.application.ports.in.AutenticarLoginInputPort;
@@ -44,7 +44,7 @@ public class LoginController implements LoginApi {
 
     @Override
     public ResponseEntity<Void> _atualizarSenha(String usuario, AtualizarSenhaDto atualizarSenhaDto) {
-        var atualizarSenhaDomain = AtualizarSenhadMapper.INSTANCE.toAtualizarSenhaDomain(atualizarSenhaDto);
+        var atualizarSenhaDomain = AtualizarSenhaDtoMapper.INSTANCE.toAtualizarSenhaDomain(atualizarSenhaDto);
         atualizarSenhaInputPort.atualizar(usuario, atualizarSenhaDomain);
         return ResponseEntity.noContent().build();
     }
