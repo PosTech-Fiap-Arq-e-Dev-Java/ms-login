@@ -32,4 +32,3 @@ services:
 
 networks:
   tc-grupo8-net:
-    external: true

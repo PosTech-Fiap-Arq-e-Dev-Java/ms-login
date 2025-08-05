@@ -17,7 +17,6 @@ Este projeto é um microsserviço responsável pela gestão de logins de usuári
 
 - `app`: aplicação Spring Boot
 - `Dockerfile`: imagem da aplicação
-- `docker-compose.yml`: orquestração dos containers (aplicação + banco)
 - `wait-for-it.sh`: script que aguarda o banco de dados estar pronto antes de subir a aplicação
 - `entrypoint.sh`: ponto de entrada para inicialização segura da aplicação
 
@@ -38,7 +37,6 @@ Certifique-se de ter os seguintes softwares instalados:
 | Arquivo              | Descrição                                                                |
 |----------------------|--------------------------------------------------------------------------|
 | `Dockerfile`         | Define a imagem da aplicação Spring Boot                                 |
-| `docker-compose.yml` | Sobe o MySQL e o microsserviço de login em containers                    |
 | `wait-for-it.sh`     | Script que aguarda o MySQL estar disponível antes de iniciar a aplicação |
 | `entrypoint.sh`      | Script de entrada que executa o JAR da aplicação                         |
 | `application.yml`    | Configurações do Spring Boot, incluindo porta e datasource               |
@@ -51,7 +49,7 @@ Certifique-se de ter os seguintes softwares instalados:
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/FIAP-Pos-Arq-e-Dev-Java/ms-login
+git clone https://github.com/PosTech-Fiap-Arq-e-Dev-Java/ms-login
 cd ms-login
 
 ```
@@ -68,13 +66,16 @@ chmod +x wait-for-it.sh
 chmod +x entrypoint.sh
 
 ```
-### 4. Crie a rede externa manualmente
+### 4. Faça o clone do docker-compose
+
+### 5. Suba o docker-compose contendo as três aplicações e o banco de dados
 
 ```bash
-docker network create tc-grupo8-net
+docker-compose up -d
 
-```
-### 5. Suba os containers com Docker Compose
+````
+
+### 6. Suba o container do ms-login
 
 ```bash
 docker-compose up --build
