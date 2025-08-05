@@ -138,6 +138,20 @@ Essa carga é realizada através de dois componentes CommandLineRunner:
 
 ---
 
+---
+
+## 🧪 Testes Automatizados com JUnit e Mockito
+
+Este projeto utiliza testes unitários com JUnit 5 e Mockito para garantir a qualidade e o comportamento esperado dos componentes da aplicação.
+
+## 🔗 Executar Testes
+
+
+```bash
+mvn clean verify
+
+```
+
 ## ‍💻 Autores
 
 Este projeto faz parte da Pós-graduação em Arquitetura e Desenvolvimento Java da FIAP e implementa um microsserviço de login com autenticação, documentação OpenAPI e persistência de dados com MySQL, seguindo boas práticas de microsserviços.
